@@ -74,25 +74,12 @@ void Widget::on_displayButton_clicked()
         }
         qDebug()<<lList.size();
         //作图
-//        imageDisplay *image = new imageDisplay();
         imageWin *iWin = new imageWin();
-//        image->resize(1000,500);
         iWin->resize(1200,600);
         QPen pen;
         QCustomPlot *pCustomPlot = new QCustomPlot(iWin);
-//        QHBoxLayout *layout = new QHBoxLayout;
-//        layout->addWidget(pCustomPlot);
-//        image->setLayout(layout);
         iWin->setCentralWidget(pCustomPlot);
         pCustomPlot->legend->setVisible(true);
-//        pCustomPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
-//        QCPAxisRect *wideAxisRect = new QCPAxisRect(pCustomPlot);
-//        wideAxisRect->setupFullAxesBox(true);
-//        wideAxisRect->addAxis(QCPAxis::atRight)->setTickLabelColor(QColor("#6050F8"));
-//        wideAxisRect->addAxis(QCPAxis::atLeft)->setTickLabelColor(QColor("#6050F8")); // add an extra axis on the left and color its numbers
-//        pCustomPlot->plotLayout()->addElement(0, 0, wideAxisRect); // insert axis rect in first row
-//        QCPMarginGroup *marginGroup = new QCPMarginGroup(pCustomPlot);
-//        wideAxisRect->setMarginGroup(QCP::msLeft | QCP::msRight, marginGroup);
 
         pCustomPlot->yAxis->setTickLabels(true);
         pCustomPlot->yAxis2->setVisible(true);
@@ -163,53 +150,30 @@ void Widget::on_displayButton_clicked()
         mGraph3->valueAxis()->setLabel("砂浓度");
         mGraph4->valueAxis()->setLabel("震级");
 
-        QCPAxisRect *volumeAxisRect = new QCPAxisRect(pCustomPlot);
-        pCustomPlot->plotLayout()->addElement(1, 0, volumeAxisRect);
-        volumeAxisRect->setMaximumSize(QSize(QWIDGETSIZE_MAX, 150));
-        volumeAxisRect->axis(QCPAxis::atBottom)->setLayer("axes");
-        volumeAxisRect->axis(QCPAxis::atBottom)->grid()->setLayer("grid");
-        pCustomPlot->plotLayout()->setRowSpacing(0);
-        volumeAxisRect->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
-        volumeAxisRect->setMargins(QMargins(0, 0, 0, 0));
-        pCustomPlot->setAutoAddPlottableToLegend(false);
-        QCPBars *volumePos = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
-        volumePos->setWidth(30);
-        volumePos->setPen(Qt::NoPen);
-        volumePos->setBrush(QColor(200, 70, 90));
-        connect(pCustomPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
-        connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), pCustomPlot->xAxis, SLOT(setRange(QCPRange)));
-        volumeAxisRect->axis(QCPAxis::atBottom)->setTicker(timer);
-        volumePos->setData(edtVector,enegyVector);
-        volumeAxisRect->setupFullAxesBox(true);
-        volumePos->rescaleAxes();
+//        QCPAxisRect *volumeAxisRect = new QCPAxisRect(pCustomPlot);
+//        pCustomPlot->plotLayout()->addElement(1, 0, volumeAxisRect);
+//        volumeAxisRect->setMaximumSize(QSize(QWIDGETSIZE_MAX, 150));
+//        volumeAxisRect->axis(QCPAxis::atBottom)->setLayer("axes");
+//        volumeAxisRect->axis(QCPAxis::atBottom)->grid()->setLayer("grid");
+//        pCustomPlot->plotLayout()->setRowSpacing(0);
+//        volumeAxisRect->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
+//        volumeAxisRect->setMargins(QMargins(0, 0, 0, 0));
+//        pCustomPlot->setAutoAddPlottableToLegend(false);
+//        QCPBars *volumePos = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
+//        volumePos->setWidth(30);
+//        volumePos->setPen(Qt::NoPen);
+//        volumePos->setBrush(QColor(200, 70, 90));
+//        connect(pCustomPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
+//        connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), pCustomPlot->xAxis, SLOT(setRange(QCPRange)));
+//        volumeAxisRect->axis(QCPAxis::atBottom)->setTicker(timer);
+//        volumePos->setData(edtVector,enegyVector);
+//        volumeAxisRect->setupFullAxesBox(true);
+//        volumePos->rescaleAxes();
 
-        QCPMarginGroup *group = new QCPMarginGroup(pCustomPlot);
-        pCustomPlot->axisRect()->setMarginGroup(QCP::msLeft|QCP::msRight, group);
-        volumeAxisRect->setMarginGroup(QCP::msLeft|QCP::msRight, group);
+//        QCPMarginGroup *group = new QCPMarginGroup(pCustomPlot);
+//        pCustomPlot->axisRect()->setMarginGroup(QCP::msLeft|QCP::msRight, group);
+//        volumeAxisRect->setMarginGroup(QCP::msLeft|QCP::msRight, group);
 
-//        QCPGraph *graph1 = pCustomPlot->addGraph(pCustomPlot->axisRect()->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atLeft));
-//        graph1->addData(dtVector,preVector);
-//        graph1->valueAxis()->setRange(0,100);
-//        graph1->rescaleKeyAxis();
-//        graph1->setPen(QPen(Qt::red)); // line color blue for first graph
-
-//        QCPGraph *graph2 = pCustomPlot->addGraph(wideAxisRect->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atLeft, 1));
-//        graph2->addData(dtVector,disVector);
-//        graph2->valueAxis()->setRange(0,20);
-
-//        QCPGraph *graph3 = pCustomPlot->addGraph(wideAxisRect->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atRight,1));
-//        graph3->addData(dtVector,sandconVector);
-//        graph3->valueAxis()->setRange(0,200);
-
-//        QCPGraph *graph4 = pCustomPlot->addGraph(wideAxisRect->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atRight));
-//        graph4->addData(dtVector,sandconVector);
-//        graph4->valueAxis()->setRange(0,400);
-//        graph4->setPen(QPen(Qt::red)); // line color blue for first graph
-//        graph4->rescaleKeyAxis();
-
-//        pCustomPlot->xAxis->setVisible(true);
-//        pCustomPlot->yAxis->setVisible(true);
-//        pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
         QList<QCPAxis*> axes;
         axes <<pCustomPlot->xAxis <<pCustomPlot->axisRect()->axis(QCPAxis::atRight, 0) << pCustomPlot->axisRect()->axis(QCPAxis::atRight, 1) << pCustomPlot->axisRect()->axis(QCPAxis::atLeft, 0) << pCustomPlot->axisRect()->axis(QCPAxis::atLeft, 1);
         pCustomPlot->axisRect()->setRangeZoomAxes(axes);
@@ -217,7 +181,6 @@ void Widget::on_displayButton_clicked()
         pCustomPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom| QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
 
         iWin->show();
-
     }
 }
 
