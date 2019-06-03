@@ -25,6 +25,7 @@ public slots:
     void imagePlot(QString eventPath , QString logPath);
 private slots:
     void on_action_triggered();
+    void on_action_2_triggered();
 };
 
 #endif // IMAGEWIN_H

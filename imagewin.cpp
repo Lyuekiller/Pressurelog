@@ -182,3 +182,9 @@ void imageWin::on_action_triggered()
     this->pCustomPlot->replot();
 
 }
+
+void imageWin::on_action_2_triggered()
+{
+    QString path = QFileDialog::getSaveFileName(this,"保存图片",".","png files (*.png)");
+    this->pCustomPlot->savePng(path);
+}
