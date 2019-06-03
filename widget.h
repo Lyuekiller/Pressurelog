@@ -18,7 +18,6 @@ public:
 private slots:
     void on_openButton_clicked();
 
-    void on_displayButton_clicked();
 
     void on_pushButton_clicked();
 

@@ -2,6 +2,7 @@
 #define IMAGEWIN_H
 
 #include <QMainWindow>
+#include "qcustomplot.h"
 
 namespace Ui {
 class imageWin;
@@ -17,6 +18,13 @@ public:
 
 private:
     Ui::imageWin *ui;
+    QCustomPlot *pCustomPlot;
+    QCPAxisRect *volumeAxisRect;
+
+public slots:
+    void imagePlot(QString eventPath , QString logPath);
+private slots:
+    void on_action_triggered();
 };
 
 #endif // IMAGEWIN_H

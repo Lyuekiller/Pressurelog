@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>459</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="displayButton">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>240</y>
+     <x>270</x>
+     <y>320</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>180</y>
+     <x>60</x>
+     <y>280</y>
      <width>281</width>
      <height>25</height>
     </rect>
@@ -51,7 +51,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>120</y>
      <width>281</width>
      <height>25</height>
@@ -73,14 +73,40 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>290</y>
+     <x>60</x>
+     <y>360</y>
      <width>371</width>
      <height>131</height>
     </rect>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如何解决time读取不出来的问题：&lt;/p&gt;&lt;p&gt;1、在excel表格的设置单元格格式中把time变成常规&lt;/p&gt;&lt;p&gt;2、然后采用text函数&lt;/p&gt;&lt;p&gt;3、在value中选中已经变成常规格式了的时间&lt;/p&gt;&lt;p&gt;4、在Format_text中输入“hh:mm:ss”，这样就可以了&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>170</y>
+     <width>301</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;事件点文件(xlsx)：&lt;/p&gt;&lt;p&gt;文件格式：数据从第二行开始&lt;/p&gt;&lt;p&gt;1、Number 2、Component 3、Date 4、Time&lt;/p&gt;&lt;p&gt;5、Label 6、North 7、East 8、Down 9、Mom_Mag&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>351</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;压裂曲线文件（xlsx）：&lt;/p&gt;&lt;p&gt;文件格式：数据从第三行开始&lt;/p&gt;&lt;p&gt;1、日期 2、时间 3、砂比 4、砂浓度 5、施工压力 6、排量&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>
