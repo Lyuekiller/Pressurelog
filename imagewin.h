@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "qcustomplot.h"
+#include "controldialog.h"
 
 namespace Ui {
 class imageWin;
@@ -20,12 +21,18 @@ private:
     Ui::imageWin *ui;
     QCustomPlot *pCustomPlot;
     QCPAxisRect *volumeAxisRect;
+    ControlDialog *Cdialog;
 
 public slots:
     void imagePlot(QString eventPath , QString logPath);
+    void tickLabelValueChange(int value);
+    void eventHideShow(int value);
+    void rangChanged();
 private slots:
     void on_action_triggered();
     void on_action_2_triggered();
+    void on_action_3_triggered();
+
 };
 
 #endif // IMAGEWIN_H

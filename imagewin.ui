@@ -29,6 +29,7 @@
     </property>
     <addaction name="action"/>
     <addaction name="action_2"/>
+    <addaction name="action_3"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -41,6 +42,11 @@
   <action name="action_2">
    <property name="text">
     <string>保存图片</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>控制板</string>
    </property>
   </action>
  </widget>

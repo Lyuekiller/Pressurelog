@@ -33,7 +33,8 @@ SOURCES += \
     general.cpp \
     imagedisplay.cpp \
     Pressurelog.cpp \
-    imagewin.cpp
+    imagewin.cpp \
+    controldialog.cpp
 
 HEADERS += \
         widget.h \
@@ -42,12 +43,14 @@ HEADERS += \
     general.h \
     imagedisplay.h \
     Pressurelog.h \
-    imagewin.h
+    imagewin.h \
+    controldialog.h
 
 FORMS += \
         widget.ui \
     imagedisplay.ui \
-    imagewin.ui
+    imagewin.ui \
+    controldialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

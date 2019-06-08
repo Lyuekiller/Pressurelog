@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>507</height>
+    <height>561</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,14 +73,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>50</x>
      <y>360</y>
      <width>371</width>
-     <height>131</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如何解决time读取不出来的问题：&lt;/p&gt;&lt;p&gt;1、在excel表格的设置单元格格式中把time变成常规&lt;/p&gt;&lt;p&gt;2、然后采用text函数&lt;/p&gt;&lt;p&gt;3、在value中选中已经变成常规格式了的时间&lt;/p&gt;&lt;p&gt;4、在Format_text中输入“hh:mm:ss”，这样就可以了&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如何解决time读取不出来的问题：&lt;/p&gt;&lt;p&gt;1、在excel表格的设置单元格格式中把time变成常规&lt;/p&gt;&lt;p&gt;2、然后采用text函数&lt;/p&gt;&lt;p&gt;3、在value中选中已经变成常规格式了的时间&lt;/p&gt;&lt;p&gt;4、在Format_text中输入“hh:mm:ss”，这样就可以了&lt;/p&gt;&lt;p&gt;5、在事件点的文件中要重新输入日期，输入方式为“2019-06-07”，&lt;/p&gt;&lt;p&gt;在压裂曲线文件中也要用同样的方法在第一列加入日期&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

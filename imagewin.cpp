@@ -53,7 +53,7 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
             lList<<log;
         }
         //作图
-        this->resize(1500,800);
+        this->resize(1300,700);
         this->setWindowTitle("压裂曲线与事件点匹配(包含震级、能量)");
         QPen pen;
         pCustomPlot = new QCustomPlot(this);
@@ -187,4 +187,55 @@ void imageWin::on_action_2_triggered()
 {
     QString path = QFileDialog::getSaveFileName(this,"保存图片",".","png files (*.png)");
     this->pCustomPlot->savePng(path);
+}
+
+void imageWin::on_action_3_triggered()
+{
+    this->Cdialog = new ControlDialog(this);
+    this->Cdialog->setGeometry(100,100,100,100);
+    int x= this->geometry().x();
+    int y= this->geometry().y();
+    int width = this->geometry().width();
+    int height = this->geometry().height();
+    this->Cdialog->setGeometry(x+width+1,y+1,300,500);
+    this->Cdialog->show();
+}
+
+void imageWin::tickLabelValueChange(int value)
+{
+    this->pCustomPlot->graph(0)->valueAxis()->setTickLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(1)->valueAxis()->setTickLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(2)->valueAxis()->setTickLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(3)->valueAxis()->setTickLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->xAxis->setTickLabelFont(QFont("雅黑",value));
+    volumeAxisRect->axis(QCPAxis::atBottom)->setTickLabelFont(QFont("雅黑",value));
+    volumeAxisRect->axis(QCPAxis::atLeft)->setTickLabelFont(QFont("雅黑",value));
+
+
+    this->pCustomPlot->graph(0)->valueAxis()->setLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(1)->valueAxis()->setLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(2)->valueAxis()->setLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->graph(3)->valueAxis()->setLabelFont(QFont("雅黑",value));
+    this->pCustomPlot->xAxis->setLabelFont(QFont("雅黑",value));
+    volumeAxisRect->axis(QCPAxis::atBottom)->setLabelFont(QFont("雅黑",value));
+    volumeAxisRect->axis(QCPAxis::atLeft)->setLabelFont(QFont("雅黑",value));
+
+    this->pCustomPlot->replot();
+
+
+}
+
+void imageWin::eventHideShow(int value)
+{
+    if(value>0){
+        this->pCustomPlot->graph(3)->setVisible(true);
+    }else{
+        this->pCustomPlot->graph(3)->setVisible(false);
+    }
+    this->pCustomPlot->replot();
+}
+
+void imageWin::rangChanged()
+{
+    int beforePre =
 }
