@@ -94,7 +94,8 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
             //            enegyVector[i] = e.getEnergy();
             QDateTime edt(e.getDate(),e.getQTime());
             edtVector[i] = QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss").toTime_t();
-            //            qDebug()<<momVector[i]<<"  "<<power<<"  "<<enegyVector[i];
+            qDebug()<<QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss");
+            qDebug()<<enegyVector[i];
         }
         QSharedPointer<QCPAxisTickerDateTime> timer(new QCPAxisTickerDateTime);
         timer->setDateTimeFormat("yyyy-MM-dd hh:mm:ss");
@@ -153,7 +154,6 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
         connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), pCustomPlot->xAxis, SLOT(setRange(QCPRange)));
         volumeAxisRect->axis(QCPAxis::atBottom)->setTicker(timer);
         volumePos->setData(edtVector,enegyVector);
-        volumeAxisRect->setupFullAxesBox(true);
         volumePos->rescaleAxes();
 
         QCPMarginGroup *group = new QCPMarginGroup(pCustomPlot);
@@ -165,7 +165,6 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
         pCustomPlot->axisRect()->setRangeZoomAxes(axes);
         pCustomPlot->axisRect()->setRangeDragAxes(axes);
         pCustomPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom| QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
-
         this->show();
     }
 }
@@ -235,7 +234,14 @@ void imageWin::eventHideShow(int value)
     this->pCustomPlot->replot();
 }
 
-void imageWin::rangChanged()
+void imageWin::rangeChanged(int num , QString value1 , QString value2)
 {
-    int beforePre =
+    if(value1.isNull()||value2.isNull()){
+        QMessageBox::information(this,"error","非法输入!");
+    }else{
+        if(value1.toInt()<value2.toInt())
+        this->pCustomPlot->graph(num)->valueAxis()->setRange(value1.toInt(),value2.toInt());
+    }
+    this->pCustomPlot->replot();
 }
+
