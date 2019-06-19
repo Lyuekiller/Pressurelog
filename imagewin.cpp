@@ -19,7 +19,6 @@ imageWin::~imageWin()
 
 void imageWin::imagePlot(QString eventPath, QString logPath)
 {
-//    qDebug()<<eventPath<<"  "<<logPath;
     if(!eventPath.isNull()&&!eventPath.isEmpty()&&!logPath.isNull()&&!logPath.isEmpty()){
         general gen;
         QList<CEvents> eList;
@@ -94,8 +93,8 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
             //            enegyVector[i] = e.getEnergy();
             QDateTime edt(e.getDate(),e.getQTime());
             edtVector[i] = QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss").toTime_t();
-            qDebug()<<QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss");
-            qDebug()<<enegyVector[i];
+//            qDebug()<<QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss");
+//            qDebug()<<enegyVector[i];
         }
         QSharedPointer<QCPAxisTickerDateTime> timer(new QCPAxisTickerDateTime);
         timer->setDateTimeFormat("yyyy-MM-dd hh:mm:ss");
@@ -165,6 +164,7 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
         pCustomPlot->axisRect()->setRangeZoomAxes(axes);
         pCustomPlot->axisRect()->setRangeDragAxes(axes);
         pCustomPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom| QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
+        pCustomPlot->axisRect()->setRangeZoomFactor(0.9);
         this->show();
     }
 }
