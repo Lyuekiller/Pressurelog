@@ -10,6 +10,9 @@ ControlDialog::ControlDialog(QWidget *parent) :
     ui->LabelSlider->setRange(5,20);
     imageWin *image = (imageWin *)this->parent();
     ui->eventCheckBox->setChecked(true);
+    ui->preCheckBox->setChecked(true);
+    ui->disCheckBox->setChecked(true);
+    ui->sandCheckBox->setChecked(true);
 
     QIntValidator *validator = new QIntValidator(-100, 1000, this);
     ui->beforPreLineEdit->setValidator(validator);
@@ -33,7 +36,11 @@ ControlDialog::ControlDialog(QWidget *parent) :
     ui->magAfterLineEdit->setText("0");
 
     connect(ui->LabelSlider,SIGNAL(sliderMoved(int)),image,SLOT(tickLabelValueChange(int)));
+
     connect(ui->eventCheckBox,SIGNAL(stateChanged(int)),image,SLOT(eventHideShow(int)));
+    connect(ui->preCheckBox,SIGNAL(stateChanged(int)),image,SLOT(preHideShow(int)));
+    connect(ui->disCheckBox,SIGNAL(stateChanged(int)),image,SLOT(disHideShow(int)));
+    connect(ui->sandCheckBox,SIGNAL(stateChanged(int)),image,SLOT(sandHideShow(int)));
 
     connect(ui->beforPreLineEdit,&QLineEdit::textChanged,image, [=](){image->rangeChanged(0,ui->beforPreLineEdit->text(),ui->afterPreLineEdit->text());});
     connect(ui->afterPreLineEdit,&QLineEdit::textChanged,image, [=](){image->rangeChanged(0,ui->beforPreLineEdit->text(),ui->afterPreLineEdit->text());});

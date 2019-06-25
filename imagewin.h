@@ -27,6 +27,9 @@ public slots:
     void imagePlot(QString eventPath , QString logPath);
     void tickLabelValueChange(int value);
     void eventHideShow(int value);
+    void preHideShow(int value);
+    void disHideShow(int value);
+    void sandHideShow(int value);
     void rangeChanged(int num , QString value1 , QString value2);
 private slots:
     void on_action_triggered();

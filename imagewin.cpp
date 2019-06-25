@@ -234,6 +234,39 @@ void imageWin::eventHideShow(int value)
     this->pCustomPlot->replot();
 }
 
+void imageWin::preHideShow(int value)
+{
+    qDebug()<<"value"<<value;
+    if(value>0){
+        this->pCustomPlot->graph(0)->setVisible(true);
+    }else{
+        this->pCustomPlot->graph(0)->setVisible(false);
+    }
+    this->pCustomPlot->replot();
+}
+
+void imageWin::disHideShow(int value)
+{
+    qDebug()<<"value"<<value;
+    if(value>0){
+        this->pCustomPlot->graph(1)->setVisible(true);
+    }else{
+        this->pCustomPlot->graph(1)->setVisible(false);
+    }
+    this->pCustomPlot->replot();
+}
+
+void imageWin::sandHideShow(int value)
+{
+    qDebug()<<"value"<<value;
+    if(value>0){
+        this->pCustomPlot->graph(2)->setVisible(true);
+    }else{
+        this->pCustomPlot->graph(2)->setVisible(false);
+    }
+    this->pCustomPlot->replot();
+}
+
 void imageWin::rangeChanged(int num , QString value1 , QString value2)
 {
     if(value1.isNull()||value2.isNull()){

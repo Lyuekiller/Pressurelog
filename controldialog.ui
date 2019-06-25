@@ -13,19 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QCheckBox" name="eventCheckBox">
-   <property name="geometry">
-    <rect>
-     <x>9</x>
-     <y>213</y>
-     <width>59</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>事件点</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -148,7 +135,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -177,6 +164,46 @@
     </item>
     <item>
      <widget class="QLineEdit" name="sandAfterLineEdit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>150</y>
+     <width>111</width>
+     <height>84</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QCheckBox" name="preCheckBox">
+      <property name="text">
+       <string>施工压力</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="disCheckBox">
+      <property name="text">
+       <string>排量</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="sandCheckBox">
+      <property name="text">
+       <string>砂浓度</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="eventCheckBox">
+      <property name="text">
+       <string>事件点</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
