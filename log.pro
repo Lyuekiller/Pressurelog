@@ -34,7 +34,8 @@ SOURCES += \
     imagedisplay.cpp \
     Pressurelog.cpp \
     imagewin.cpp \
-    controldialog.cpp
+    controldialog.cpp \
+    axistag.cpp
 
 HEADERS += \
         widget.h \
@@ -44,7 +45,8 @@ HEADERS += \
     imagedisplay.h \
     Pressurelog.h \
     imagewin.h \
-    controldialog.h
+    controldialog.h \
+    axistag.h
 
 FORMS += \
         widget.ui \

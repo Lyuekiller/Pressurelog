@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "qcustomplot.h"
 #include "controldialog.h"
+#include "axistag.h"
 
 namespace Ui {
 class imageWin;
@@ -22,6 +23,9 @@ private:
     QCustomPlot *pCustomPlot;
     QCPAxisRect *volumeAxisRect;
     ControlDialog *Cdialog;
+    AxisTag *mTag1;
+    AxisTag *mTag2;
+    QTimer mDataTimer;
 
 public slots:
     void imagePlot(QString eventPath , QString logPath);
@@ -31,10 +35,13 @@ public slots:
     void disHideShow(int value);
     void sandHideShow(int value);
     void rangeChanged(int num , QString value1 , QString value2);
+    void timerSlot();
+
 private slots:
     void on_action_triggered();
     void on_action_2_triggered();
     void on_action_3_triggered();
+
 
 };
 

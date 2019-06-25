@@ -7,7 +7,7 @@
 #include <QPen>
 imageWin::imageWin(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::imageWin)
+    ui(new Ui::imageWin),mTag1(0)
 {
     ui->setupUi(this);
 }
@@ -165,6 +165,13 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
         pCustomPlot->axisRect()->setRangeDragAxes(axes);
         pCustomPlot->setInteractions(QCP::iRangeDrag|QCP::iRangeZoom| QCP::iSelectAxes | QCP::iSelectLegend | QCP::iSelectPlottables);
         pCustomPlot->axisRect()->setRangeZoomFactor(0.9);
+
+        mTag1 = new AxisTag(mGraph1->valueAxis());
+        mTag1->setPen(mGraph1->pen());
+
+        connect(&mDataTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
+        mDataTimer.start(40);
+
         this->show();
     }
 }
@@ -278,3 +285,27 @@ void imageWin::rangeChanged(int num , QString value1 , QString value2)
     this->pCustomPlot->replot();
 }
 
+void imageWin::timerSlot()
+{
+    // calculate and add a new data point to each graph:
+    QPointer<QCPGraph> mGraph1 = this->pCustomPlot->graph(0);
+
+
+
+      //make key axis range scroll with the data:
+//    this->pCustomPlot->xAxis->rescale();
+//    mGraph1->rescaleValueAxis(false, true);
+//    mGraph2->rescaleValueAxis(false, true);
+//    this->pCustomPlot->xAxis->setRange(this->pCustomPlot->xAxis->range().upper, 100, Qt::AlignRight);
+
+    // update the vertical axis tag positions and texts to match the rightmost data point of the graphs:
+    double graph1Value = mGraph1->dataMainValue(mGraph1->dataCount()-1);
+    qDebug()<<graph1Value;
+//    double graph2Value = mGraph2->dataMainValue(mGraph2->dataCount()-1);
+    mTag1->updatePosition(graph1Value);
+//    mTag2->updatePosition(graph2Value);
+    mTag1->setText(QString::number(graph1Value, 'f', 2));
+//    mTag2->setText(QString::number(graph2Value, 'f', 2));
+
+    this->pCustomPlot->replot();
+}
