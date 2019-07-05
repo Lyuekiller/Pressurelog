@@ -65,7 +65,7 @@ void AxisTag::setText(const QString &text)
     mLabel->setText(text);
 }
 
-void AxisTag::updatePosition(double value)
+void AxisTag::updatePosition(double x_val , double y_val)
 {
 
     // since both the arrow and the text label are chained to the dummy tracer (via anchor
@@ -74,7 +74,7 @@ void AxisTag::updatePosition(double value)
     // of the axis rect, it is always kept at 1. The vertical coordinate type was set to
     // ptPlotCoordinates of the passed parent axis, so the vertical coordinate is set to the new
     // value.
-    mDummyTracer->position->setCoords(1, value);
+    mDummyTracer->position->setCoords(1, y_val);
 
     // We want the arrow head to be at the same horizontal position as the axis backbone, even if
     // the axis has a certain offset from the axis rect border (like the added second y axis). Thus we

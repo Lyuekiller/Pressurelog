@@ -19,6 +19,13 @@ imageWin::~imageWin()
 
 void imageWin::imagePlot(QString eventPath, QString logPath)
 {
+    QProgressDialog *progressDialog=new QProgressDialog(this);
+    progressDialog->setWindowModality(Qt::WindowModal);
+    progressDialog->setMinimumDuration(5);
+    progressDialog->setWindowTitle("请稍等");
+    progressDialog->setLabelText("读取数据中......");
+    progressDialog->setCancelButtonText("Cancel");
+
     if(!eventPath.isNull()&&!eventPath.isEmpty()&&!logPath.isNull()&&!logPath.isEmpty()){
         general gen;
         QList<CEvents> eList;
@@ -51,6 +58,8 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
 //            qDebug()<<log.getDate()<<"  "<<log.getQTime()<<"  "<<log.getSand_concentration();
             lList<<log;
         }
+        progressDialog->setRange(0,eList.size()+lList.size()-1);
+        int progressNum=0;
         //作图
         this->resize(1300,700);
         this->setWindowTitle("压裂曲线与事件点匹配(包含震级、能量)");
@@ -83,6 +92,8 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
             sandconVector[i] = pl.getSand_concentration();
             QDateTime dt(pl.getDate(),pl.getQTime());
             dtVector[i] = QDateTime::fromString(dt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss").toTime_t();
+            progressDialog->setValue(progressNum);
+            progressNum++;
         }
 
         for(int i = 0; i<eList.size(); i++){
@@ -95,6 +106,8 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
             edtVector[i] = QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss").toTime_t();
 //            qDebug()<<QDateTime::fromString(edt.toString("yyyy-MM-dd hh:mm:ss"),"yyyy-MM-dd hh:mm:ss");
 //            qDebug()<<enegyVector[i];
+            progressDialog->setValue(progressNum);
+            progressNum++;
         }
         QSharedPointer<QCPAxisTickerDateTime> timer(new QCPAxisTickerDateTime);
         timer->setDateTimeFormat("yyyy-MM-dd hh:mm:ss");
@@ -169,8 +182,10 @@ void imageWin::imagePlot(QString eventPath, QString logPath)
         mTag1 = new AxisTag(mGraph1->valueAxis());
         mTag1->setPen(mGraph1->pen());
 
-        connect(&mDataTimer, SIGNAL(timeout()), this, SLOT(timerSlot()));
-        mDataTimer.start(40);
+        mTag2 = new AxisTag(mGraph4->valueAxis());
+        mTag2->setPen(mGraph4->pen());
+
+        connect(this->pCustomPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
 
         this->show();
     }
@@ -285,10 +300,31 @@ void imageWin::rangeChanged(int num , QString value1 , QString value2)
     this->pCustomPlot->replot();
 }
 
-void imageWin::timerSlot()
+void imageWin::mouseMove(QMouseEvent *event)
 {
     // calculate and add a new data point to each graph:
     QPointer<QCPGraph> mGraph1 = this->pCustomPlot->graph(0);
+    QPointer<QCPGraph> mGraph4 = this->pCustomPlot->graph(3);
+
+    int x_pos = event->pos().x();
+    int y_pos = event->pos().y();
+
+    int x_val = this->pCustomPlot->xAxis->pixelToCoord(x_pos);
+    double y_val_pre = mGraph1->data()->findBegin(x_val)->value;
+    double y_val_event = mGraph4->data()->findBegin(x_val)->value;
+//    double y_val = mGraph1->valueAxis()->pixelToCoord(y_pos);
+
+    qDebug()<<"x:"<<QString::number(x_val, 10, 4)<<" "<<"y:"<<y_val_event;
+
+
+    mTag1->updatePosition(x_val,y_val_pre);
+    mTag2->updatePosition(x_val,y_val_event);
+
+    mTag1->setText(QString::number(y_val_pre, 'f', 2));
+    mTag2->setText(QString::number(y_val_event, 'f', 2));
+
+
+
 
 
 
@@ -299,12 +335,12 @@ void imageWin::timerSlot()
 //    this->pCustomPlot->xAxis->setRange(this->pCustomPlot->xAxis->range().upper, 100, Qt::AlignRight);
 
     // update the vertical axis tag positions and texts to match the rightmost data point of the graphs:
-    double graph1Value = mGraph1->dataMainValue(mGraph1->dataCount()-1);
-    qDebug()<<graph1Value;
+//    double graph1Value = mGraph1->dataMainValue(mGraph1->dataCount()-1);
+//    qDebug()<<graph1Value;
 //    double graph2Value = mGraph2->dataMainValue(mGraph2->dataCount()-1);
-    mTag1->updatePosition(graph1Value);
+//    mTag1->updatePosition(graph1Value);
 //    mTag2->updatePosition(graph2Value);
-    mTag1->setText(QString::number(graph1Value, 'f', 2));
+//    mTag1->setText(QString::number(graph1Value, 'f', 2));
 //    mTag2->setText(QString::number(graph2Value, 'f', 2));
 
     this->pCustomPlot->replot();

@@ -25,7 +25,6 @@ private:
     ControlDialog *Cdialog;
     AxisTag *mTag1;
     AxisTag *mTag2;
-    QTimer mDataTimer;
 
 public slots:
     void imagePlot(QString eventPath , QString logPath);
@@ -35,7 +34,7 @@ public slots:
     void disHideShow(int value);
     void sandHideShow(int value);
     void rangeChanged(int num , QString value1 , QString value2);
-    void timerSlot();
+    void mouseMove(QMouseEvent *event);
 
 private slots:
     void on_action_triggered();

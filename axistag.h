@@ -11,6 +11,14 @@ public:
     explicit AxisTag(QCPAxis *parentAxis);
     virtual ~AxisTag();
 
+    enum TracerType
+    {
+        XAxisTracer,
+        YAxisTracer,
+        DataTracer,
+        CrossLine
+    };
+
     // setters:
     void setPen(const QPen &pen);
     void setBrush(const QBrush &brush);
@@ -22,13 +30,14 @@ public:
     QString text() const { return mLabel->text(); }
 
     // other methods:
-    void updatePosition(double value);
+    void updatePosition(double x_val , double y_val);
 
 protected:
     QCPAxis *mAxis;
     QPointer<QCPItemTracer> mDummyTracer;
     QPointer<QCPItemLine> mArrow;
     QPointer<QCPItemText> mLabel;
+    TracerType type = DataTracer;
 signals:
 
 public slots:
